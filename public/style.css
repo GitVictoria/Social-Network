@@ -1,0 +1,66 @@
+* {
+    /* background-color: azure; */
+    font-family: 'Space Mono', monospace;
+    font-family: 'Playfair Display', serif;
+}
+
+body {
+    background-size: cover;
+    background-image: url("oneLine.jpg");
+    width: 800px;
+    height: 900px;
+}
+
+.logo {
+    height: 100px;
+    width: 200px;
+}
+
+#main {
+}
+
+.welcome-container {
+    padding: 20px;
+
+}
+
+.registration-container {
+}
+
+input {
+    border: none;
+    border-bottom: 2px solid black;
+    width: 250px;
+    padding-top: 20px;
+    margin-top: 20px;
+    background-color: #f5f5f56e;
+    text-align: center;
+    font-size: 20px;
+}
+
+.register-button {
+    margin-top: 50px;
+    width: 150px;
+    font-size: 20px;
+
+}
+
+.login-button {
+    text-decoration: none;
+    text-align: center;
+    margin-top: 50px;
+    width: 250px;
+    font-size: 20px;
+
+}
+
+.welcome-logo {
+    margin-top: 25px;
+    height: 70px;
+    width: 100px;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
