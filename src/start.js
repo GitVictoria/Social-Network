@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from './welcome';
-import Main from './main';
+import App from './app';
+
 
 
 let component;
@@ -11,7 +12,7 @@ let component;
 if (location.pathname == '/welcome') {
     component = <Welcome/>; }
 else {
-    component = <Main/>;
+    component = <App/>;
     // render welcome
 }
 ReactDOM.render(
@@ -32,4 +33,4 @@ ReactDOM.render(
 // composition notes
 // composing is putting components inside of componenets (nesting)
 // presentational componenets -> only show or 'present'
-// container component -> functional, smart, define behaviour 
+// container component -> functional, smart, define behaviour

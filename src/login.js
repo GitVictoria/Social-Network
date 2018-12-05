@@ -2,6 +2,8 @@ import React from 'react';
 import axios from './axios';
 
 // check hash routing in Vue
+// sendgird
+//sendinblue
 export default class Login extends React.Component {
     constructor() {
         super();
@@ -33,7 +35,7 @@ export default class Login extends React.Component {
                 });
                 // });
             } else {
-                location.replace('/main');
+                location.replace('/');
             }
         });
     }
@@ -64,7 +66,7 @@ export default class Login extends React.Component {
                 </center>
                 <center>
                     <div className="reg-error">
-                        <h1>{this.state.error.error}</h1>
+                        <h1>{this.state.error}</h1>
                     </div>
                 </center>
             </div>

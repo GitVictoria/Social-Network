@@ -9,24 +9,46 @@ import Registration from './registration';
 import Login from './login';
 // React router: HashRouter, BrowerRouter
 import  { HashRouter, Route } from 'react-router-dom';
+// import  { BrowserRouter } from 'react-router-dom';
 
 export default function Welcome() {
     return (
-        // all JSX - what I want to appear on the screen
-        // must be contained within one element
-        // inside of hashRoute                 --if the url is /, then render Registration
-    // --if the url is /login. then render the Login component
-    //
+
         <div className="welcome-container">
-            <center><h1>Welcome To The Hang</h1>
-                <img className="welcome-logo" src="Hanger.jpg"/></center>
+            
+            <img className="welcome-logo" src="Hanger.jpg"/>
             <HashRouter>
                 <div>
                     <Route exact path = '/' component = { Registration } />
                     <Route path = '/login' component = { Login } />
                 </div>
             </HashRouter>
-
         </div>
+
+
+
     );
 }
+
+// all JSX - what I want to appear on the screen
+// must be contained within one element
+// inside of hashRoute                 --if the url is /, then render Registration
+// --if the url is /login. then render the Login component
+//
+
+// browser router user browser history API
+// user can change the url without making the request to server at all
+//history.pushState({message: 'hahahahha'}, 'Joker', '/wiki/JOker')
+// PART 4
+// users own profile
+// components
+// 1. Profile = gets passed all user info from App plus functions
+// for showing the uploader (which it will pass to the profile pic child)
+// and setting the Bio which it will pass to Bio
+// 2. Bio - get passed a function for setting the bio
+// 1. Will have to be a class
+// <BrowserRouter>
+//     <div>
+//         <Route path='/user/:id' component={User}/>
+//     </div>
+// </BrowserRouter>

@@ -123,7 +123,7 @@ export default class Registration extends React.Component {
             return;
         }
 
-        // switch (e.target.name,) {
+        // switch (e.target.name) {
         //                 case 'first':
         //                     error.first = e.target.value.length < 2 && e.target.value.length > 0 ?
         //                         this.setState({
@@ -187,7 +187,7 @@ export default class Registration extends React.Component {
             } console.log(this.state.error);
             // } if (this.state.error)
             console.log("resp in then of POST /registration", resp);
-            location.replace('/main');
+            location.replace('/');
         });
     }
 

@@ -4,6 +4,14 @@ var db = spicedPg(
     `postgres:postgres:postgres@localhost:5432/socialNetwork`
 );
 
+exports.getUser = id => {
+    return db.query(
+        `SELECT * FROM users
+        WHERE id = $1`,
+        [id]
+    );
+};
+
 exports.createUsers = (first, last, password, email) => {
     return db.query(
         `INSERT INTO users (first, last, password, email)
@@ -18,5 +26,24 @@ exports.checkEmail = email => {
         `SELECT id, password FROM users
         WHERE email = $1`,
         [email]
+    );
+};
+
+exports.storeImages = (id, url) => {
+    return db.query(
+        `UPDATE users
+          SET profilepic = $2
+          WHERE id = $1`,
+        [id, url]
+    );
+};
+
+exports.storeBio = (id, bio) => {
+    return db.query(
+        `UPDATE users
+        SET bio = $2
+        WHERE id = $1
+        RETURNING *`,
+        [id, bio]
     );
 };
