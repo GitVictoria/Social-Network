@@ -47,3 +47,20 @@ exports.storeBio = (id, bio) => {
         [id, bio]
     );
 };
+
+exports.checkStatus = (sender_id, receiver_id) => {
+    return db.query(
+        `SELECT * FROM friendships
+        WHERE (receiver_id = $1 AND sender_id = $2)
+        OR (receiver_id = $2 AND sender_id = $1)`,
+        [sender_id, receiver_id]
+    );
+};
+
+exports.sendRequest = (sender_id, receiver_id) => {
+    return db.query(
+        `INSERT INTO friendships (sender_id, receiver_id)
+        VALUES ($1, $2) RETURNING *`,
+        [sender_id, receiver_id]
+    );
+};

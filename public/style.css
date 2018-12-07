@@ -117,5 +117,12 @@ input {
 .opp-container {
     border: 3px solid black;
     background-color: pink;
-    
+
+}
+
+.friendbutton {
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    border: 2px solid black;
 }

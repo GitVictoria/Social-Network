@@ -36,6 +36,8 @@ export default class OtherPersonProfile extends React.Component {
                 <img className="profile-pic" src={this.state.profilepic}/>
                 <h3>Get to know a little about {this.state.first}!</h3>
                 <p>{this.state.bio}</p>
+                <FriendButton otherUserId = {this.props.match.params.id}/>
+
                 <Link to = '/user/2'>user2</Link>
                 <h1>{ this.props.match.params.id }</h1>
             </div>
@@ -45,7 +47,7 @@ export default class OtherPersonProfile extends React.Component {
 
 // ;
 
-//                 <FriendButton otherUserId = {this.props.match.params.id}/>
+//
 
 // links to other ppls profile
 // this.props.match.params.id id of the person whos profile youre looking at

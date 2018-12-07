@@ -72,6 +72,37 @@ app.use(function(req, res, next){
 
 // ------------- MY GET REQUESTS ---------------//
 
+
+
+app.get("/friendship/:id", (req, res) => {
+    db.checkStatus(req.session.user_id, req.params.id).then(results => {
+        console.log("result in checkFriendship:", results);
+        res.json(results.rows[0]);
+    });
+});
+
+app.post("/friendship/:id/send", (req, res) => {
+    db.sendRequest(req.session.user_id, req.params.id).then(results => {
+        console.log("result in Send Friendship:", results);
+        res.json(results.rows[0]);
+    });
+});
+
+// app.post("/friendship/:id/cancel", (req, res) => {
+//     db.cancelRequest(req.session.userId, req.params.id).then(results => {
+//         console.log("result in cancel Friendship: ", results);
+//         res.json(results.rows[0]);
+//     });
+// });
+//
+// app.post("/friendship/:id/accept", (req, res) => {
+//     db.acceptRequest(req.session.userId, req.params.id).then(results => {
+//         console.log("result in accept Friendship: ", results);
+//         res.json(results.rows[0]);
+//     });
+// });
+
+
 app.get('/logout', (req, res) => {
     req.session.user_id = null;
     res.redirect("/");
