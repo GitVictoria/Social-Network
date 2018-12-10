@@ -4,6 +4,24 @@ var db = spicedPg(
     `postgres:postgres:postgres@localhost:5432/socialNetwork`
 );
 
+exports.friendsAndWannabes = receiverId => {
+    return db.query(
+        `
+       SELECT users.id, first, last, profilepic, accepted
+       FROM friendships
+       JOIN users
+       ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
+       OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+       OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)
+   `, [receiverId]
+    );
+};
+
+module.exports.getUsersByIds = arrOfIds => {
+    const query = `SELECT id, first, last, profilepic FROM users WHERE id = ANY($1)`;
+    return db.query(query, [arrOfIds]);
+};
+
 exports.getUser = id => {
     return db.query(
         `SELECT * FROM users

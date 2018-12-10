@@ -1,12 +1,14 @@
 const express = require("express");
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server, { origins: 'localhost:8080' });
 const compression = require("compression");
 const bodyParser = require('body-parser');
 const csurf = require("csurf");
 const bcrypt = require("./bcrypt");
 const db = require("./db");
 const s3 = require("./s3");
-var path = require("path");
+const path = require("path");
 
 //---------- BOILER PLATE TO UPLOAD FILES ----------------//
 
@@ -38,13 +40,17 @@ var uploader = multer({
 
 //--------- COOKIE SESSION -----------//
 
-var cookieSession = require("cookie-session");
-app.use(
-    cookieSession({
-        secret: process.env.SESSION_SECRET || `I'm always angry.`, // require("./passwords").sessionSecrets
-        maxAge: 1000 * 60 * 60 * 24 * 14
-    })
-);
+const cookieSession = require('cookie-session');
+const cookieSessionMiddleware = cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+
 //---------- END OF COOKIE SESSION  -------//
 
 
@@ -72,35 +78,39 @@ app.use(function(req, res, next){
 
 // ------------- MY GET REQUESTS ---------------//
 
-
+app.get('/friendslist', (req, res) => {
+    db.friendsAndWannabes(req.session.user_id).then(results => {
+        res.json(results.rows);
+    }).catch(err => {
+        console.log(err);
+    });
+});
 
 app.get("/friendship/:id", (req, res) => {
     db.checkStatus(req.session.user_id, req.params.id).then(results => {
-        console.log("result in checkFriendship:", results);
         res.json(results.rows[0]);
+    }).catch(err => {
+        console.log(err);
     });
 });
 
 app.post("/friendship/:id/send", (req, res) => {
     db.sendRequest(req.session.user_id, req.params.id).then(results => {
-        console.log("result in Send Friendship:", results);
         res.json(results.rows[0]);
     });
 });
 
-// app.post("/friendship/:id/cancel", (req, res) => {
-//     db.cancelRequest(req.session.userId, req.params.id).then(results => {
-//         console.log("result in cancel Friendship: ", results);
-//         res.json(results.rows[0]);
-//     });
-// });
-//
-// app.post("/friendship/:id/accept", (req, res) => {
-//     db.acceptRequest(req.session.userId, req.params.id).then(results => {
-//         console.log("result in accept Friendship: ", results);
-//         res.json(results.rows[0]);
-//     });
-// });
+app.post("/friendship/:id/cancel", (req, res) => {
+    db.cancelRequest(req.session.userId, req.params.id).then(results => {
+        res.json(results.rows[0]);
+    });
+});
+
+app.post("/friendship/:id/accept", (req, res) => {
+    db.acceptRequest(req.session.userId, req.params.id).then(results => {
+        res.json(results.rows[0]);
+    });
+});
 
 
 app.get('/logout', (req, res) => {
@@ -111,7 +121,6 @@ app.get('/logout', (req, res) => {
 app.get('/user', (req, res) => {
     db.getUser(req.session.user_id).then(results => {
         res.json(results); //repsonse from database
-        console.log(results);
         // user_id: req.session.user_id;
         // console.log("this is app.get results: ", results);
         // first: results,
@@ -138,14 +147,12 @@ app.get('/user', (req, res) => {
 // ------------- MY POST REQUESTS ---------------//
 
 app.get('/user/:id/info', (req, res) => {
-    console.log("req.params.id, ", req.params.id);
     if (req.params.id == req.session.user_id) {
         res.redirect("/");
         // res.json({ error: "same ID" });
     } else {
         db.getUser(req.params.id)
             .then(results => {
-                console.log("results in get user/info: ", results.data);
                 res.json(results);
             })
             .catch(err => {
@@ -156,7 +163,6 @@ app.get('/user/:id/info', (req, res) => {
 
 app.post('/bio', (req, res) => {
     if (req.body !== null) {
-        console.log("req.body in bio is: ", req.body.bio);
         db.storeBio(
             req.session.user_id,
             req.body.bio
@@ -171,7 +177,6 @@ app.post('/bio', (req, res) => {
 
 app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
     if (req.file) {
-        console.log("req.session.user_id: ", req.session.user_id);
         const url = 'https://s3.amazonaws.com/victoria-catnip-imageboards/' + req.file.filename;
         db.storeImages(
             req.session.user_id, url
@@ -207,10 +212,7 @@ app.post('/registration', (req, res) => {
     bcrypt.hash(req.body.password).then(hash => {
         db.createUsers(req.body.first, req.body.last, hash, req.body.email)
             .then(function(results) {
-                console.log("app.post of registration running!");
                 req.session.user_id = results.rows[0].id;
-                console.log("req.session.user_id: ", req.session.user_id);
-                console.log("results.rows[0].id: ", results.rows[0].id);
                 res.json(results);
             })
             .catch(err => {
@@ -228,7 +230,6 @@ app.post('/login', (req, res) => {
     }
     else {
         db.checkEmail(req.body.email).then(function(results) {
-            console.log("reesults in APP POST: ", results);
             if (!results.rows[0]) {
                 throw new Error;
             }
@@ -291,8 +292,90 @@ app.get("*", function(req, res) {
     // THIS HAS TO BE THE LAST ONE
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
     console.log("I'm listening.");
 });
+
+// all of the server-side socket code here bellow
+// listen for socket connections here - log in or register
+// io is server side socket
+// 'socket' represents the connection that just happened
+// everytime a user connects they get a unique socket id
+// we have to pass this id to cookie, so we can access use info via socket
+
+//this object will be maintaining a list of everyone currently online
+// every key value pair in the object represents a user
+let onlineUsers = {
+};
+
+
+// everytime io runs, a new person just connected
+io.on('connection', socket => {
+    console.log(`user with socket id ${ socket.id } just connected`);
+
+
+
+
+
+    let userId = socket.request.session.user_id;
+    let socketId = socket.id;
+
+    onlineUsers[socketId] = userId;
+
+    let arrOfIds = Object.values(onlineUsers);
+    // gives us every value inside of object
+    // stores those in array
+
+    db.getUsersByIds(arrOfIds).then(results => {
+        console.log("SERVER RESPONSE IN db.getUserByIds: ", results.rows);
+        socket.emit("onlineUsers", results.rows);
+    }).catch(err => {
+        console.log(err);
+    });
+
+    db.getUser(userId).then(result => {
+
+
+        if (arrOfIds.filter(id => id == userId).length == 1) {
+            socket.broadcast.emit('userJoined', result.rows[0]);
+        }
+    });
+
+    // GET THE NEW USER TO JOIN THE ARRAY
+
+
+
+
+    socket.on('disconnect', function(arrOfIds) {
+        console.log(`socket with id ${socketId } just disconnected`);
+        db.getUser(userId).then(result => {
+            delete onlineUsers[socketId];
+            var newArr = Object.values(onlineUsers);
+            console.log(newArr.includes(userId));
+            if (newArr.includes(userId) == true) {
+                return;
+            }
+            else {
+                io.sockets.emit('userLeft', result.rows[0]);
+            }
+            // if the id is unique
+        }).catch(err => {
+            console.log(err);
+        });
+
+        // figure out if the user has just closed one of the tabs OR actually disconnected
+    });
+
+    // pass emit 2 arguments
+    // 1. name of message -> must be a string
+    // 2. any data we want to send along the message - > could be db.query, API, array, object, string
+    // db.getUser(userId).then(results => {
+    //     socket.emit('catnip', results);
+    // });
+});
+
+//server is the big wrapper around the current app(server).
+// This server
+//also listens to socket io communication
 
 //

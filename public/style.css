@@ -126,3 +126,13 @@ input {
     text-align: center;
     border: 2px solid black;
 }
+
+.friendpic {
+    width: 100px;
+    height: 100px;
+}
+
+.online-users {
+    width: 150px;
+    height: 150px;
+}

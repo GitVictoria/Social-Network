@@ -2,18 +2,40 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from './welcome';
 import App from './app';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxPromise from 'redux-promise';
+import reducer from './reducers';
+import { initSocket } from './socket';
 
 
+
+// ---------- BOILER PLATE FOR REDUX --------//
+const store = createStore(reducer, applyMiddleware(reduxPromise));
+
+const elem = (
+    <Provider store ={ store }>
+        <App />
+    </Provider>
+);
+
+// ---------- END OF BOILER PLATE FOR REDUX --------//
 
 let component;
+
+
 
 //the bellow should only be called once in whole project
 // location.pathname is a url
 if (location.pathname == '/welcome') {
     component = <Welcome/>; }
 else {
-    component = <App/>;
-    // render welcome
+    component = (
+        initSocket(store),
+        <Provider store ={ store }>
+            <App />
+        </Provider>);
+    // innitiate socket when app renders
 }
 ReactDOM.render(
     component,

@@ -7,6 +7,8 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Logout from './logout';
 import Profile from './profile';
 import OtherPersonProfile from './otherpersonprofile';
+import Friends from './friends';
+import Onlineusers from './onlineusers';
 
 export default class App extends React.Component {
     constructor() {
@@ -84,10 +86,19 @@ export default class App extends React.Component {
                             return <OtherPersonProfile {...props}
                                 key = { props.match.url }/>;
                         }} />
-
+                        <Route
+                            exact path = "/friends"
+                            component={Friends}
+                        />
+                        <Route
+                            exact path = "/online"
+                            component = {Onlineusers}
+                        />
                     </div>
                 </BrowserRouter>
             </div>
+
+
 
 
 
@@ -98,6 +109,13 @@ export default class App extends React.Component {
 // render function in the router does not automatically pass props to the component its rendering
 // <Route path = "///" componeent  = {COMPOENENT }/> this way all the props are passed
 // above syntax works without links to other peoples profiles.
+
+// < Route exact path = '/friends' render = { (props) => {
+//     return <Friends {...props}
+//         key = {props.match.url}/>;
+// }}/>
+
+
 
 //PART 5
 // GET USER with dynamic ID from data base
