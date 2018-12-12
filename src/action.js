@@ -2,6 +2,34 @@ import { initSocket } from './socket';
 import axios from './axios';
 
 
+// ------- CLASS EXAMPLE ------------ //
+
+export async function addAnimals(animals) {
+    console.log("addAnimals function is running in ACTION");
+    return {
+        type: 'ADD_ANIMALS',
+        cuteAnimals: animals // whats on the right must equal whats in the brackets!!!!
+    };
+}
+
+
+// ------- CLASS EXAMPLE ------------ //
+
+export async function listNewMessages(listMessages) {
+    return {
+        type: 'DISPLAY_MESSAGES',
+        message: listMessages
+    };
+}
+
+export async function addNewMessage(addMessage) {
+    return {
+        type: 'ADD_NEW_MESSAGE',
+        message: addMessage
+    };
+}
+
+
 export async function userJustLeft(userWhoLeft) {
     return {
         type: 'USER_LEFT',

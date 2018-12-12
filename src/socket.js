@@ -3,6 +3,9 @@ import * as io from 'socket.io-client';
 import {usersOnline} from './action';
 import { newOnlineUser } from './action';
 import { userJustLeft } from './action';
+import { listNewMessages} from './action';
+import { addNewMessage} from './action';
+
 
 let socket;
 
@@ -13,6 +16,17 @@ export function initSocket(store) {
         socket = io.connect();
 
         // most of our socket code goes here
+
+        socket.on('newMessage', addMessage => {
+            console.log("message in client side socket, new message: ", addMessage);
+            store.dispatch(addNewMessage(addMessage));
+        });
+
+        socket.on('messages', listMessages => {
+            console.log("message in client side socket, online messages: ", listMessages);
+            store.dispatch(listNewMessages(listMessages));
+
+        });
 
         // on() accepts 2 arguments
         // 1. message name -> that I passed in server
@@ -40,7 +54,15 @@ export function initSocket(store) {
             store.dispatch(userJustLeft(userWhoLeft));
         });
 
+        // ------- CLASS EXAMPLE ------------ //
 
+        // socket.on('cuteAnimals', data => {
+        //     console.log('data: ', data);
+        //
+        //     store.dispatch(addAnimals(data))
+        // }
+
+        // ------- CLASS EXAMPLE ------------ //
 
     }
 

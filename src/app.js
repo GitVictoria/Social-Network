@@ -9,6 +9,7 @@ import Profile from './profile';
 import OtherPersonProfile from './otherpersonprofile';
 import Friends from './friends';
 import Onlineusers from './onlineusers';
+import Chat from './chat';
 
 export default class App extends React.Component {
     constructor() {
@@ -58,7 +59,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="app-container">
                 <Logout/>
                 <Logo/>
 
@@ -68,7 +69,6 @@ export default class App extends React.Component {
                     showUploader = {this.showUploader}
                 />
                 {this.state.uploaderIsVisible && <Uploader/>}
-                <h1>Welcome to the Hang</h1>
                 <BrowserRouter>
                     <div>
                         < Route exact path='/' render= { () => {
@@ -94,6 +94,11 @@ export default class App extends React.Component {
                             exact path = "/online"
                             component = {Onlineusers}
                         />
+                        <Route
+                            exact path = "/chat"
+                            component = {Chat}
+                        />
+
                     </div>
                 </BrowserRouter>
             </div>
@@ -105,6 +110,16 @@ export default class App extends React.Component {
         );
     }// if the left is true, then render the right
 }
+
+
+
+
+
+
+
+
+// <h1>Welcome to the Hang</h1>
+
 
 // render function in the router does not automatically pass props to the component its rendering
 // <Route path = "///" componeent  = {COMPOENENT }/> this way all the props are passed

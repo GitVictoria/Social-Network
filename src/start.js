@@ -7,11 +7,13 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxPromise from 'redux-promise';
 import reducer from './reducers';
 import { initSocket } from './socket';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 
 // ---------- BOILER PLATE FOR REDUX --------//
-const store = createStore(reducer, applyMiddleware(reduxPromise));
+
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(reduxPromise)) );
 
 const elem = (
     <Provider store ={ store }>

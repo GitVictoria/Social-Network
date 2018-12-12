@@ -20,7 +20,6 @@ class Friends extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         if (!this.props.friends) {
             return null;
         }
@@ -72,9 +71,10 @@ const mapStateToProps = state => {
 
     var list = state.friends;
     return {
-        friends: list && list.filter(
-            user=>user.accepted == true
-        ),
+        friends: list
+         && list.filter(
+             user=>user.accepted == true
+         ),
         wannabes: list && list.filter(
             user=>!user.accepted
         )

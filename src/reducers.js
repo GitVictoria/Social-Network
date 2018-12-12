@@ -33,11 +33,29 @@ export default function(state = {}, action) {
         });
     } else if (action.type == 'UNFRIEND') {
         state = Object.assign({}, state, {
-            friends: "FILTER OUT THE ID THAT WAS RETURNED"
+            friends: state.friends.filter(
+                f => {
+                    if(f.id != action.id){
+                        return f;
+                    }
+
+                }
+            )
         });
     } else if (action.type == 'ACCEPT_FRIEND_REQUEST') {
         state = Object.assign({}, state, {
-            friends: "MAP"
+            friends: state.friends.map(
+                f => {
+                    if (f.id == action.id) {
+                        return {
+                            ...f,
+                            accepted: true
+                        };
+                    } else {
+                        return f;
+                    }
+                }
+            )
         });
     }
 
@@ -56,7 +74,24 @@ export default function(state = {}, action) {
     } else if (action.type == 'USER_LEFT') {
         return {
             ...state,
-            users: [...state].filter(action.users)
+            users: state.users.filter(
+                user => {
+                    if (user.id != action.users) {
+                        return users;
+                    }
+                }
+            )
+        };
+    } else if (action.type == 'DISPLAY_MESSAGES') {
+        return {
+            ...state,
+            message: action.message
+        };
+    } else if (action.type == 'ADD_NEW_MESSAGE') {
+        console.log("action in add message reducer :  ", action.message);
+        return {
+            ...state,
+            message: action.message
         };
     }
 

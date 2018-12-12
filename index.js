@@ -308,6 +308,32 @@ server.listen(8080, function() {
 let onlineUsers = {
 };
 
+let arrOfMessages = [];
+
+
+
+
+
+// ------- CLASS EXAMPLE ------------ //
+// let cuteAnimals = [
+//     {
+//         animal : 'quoka',
+//         cute: 8
+//     },
+//     {
+//         animal : 'squirrel',
+//         cute: 9
+//     },
+//     {
+//         animal : 'Lucky',
+//         cute: 10
+//     }
+//
+// ];
+
+// socket.emit('cuteAnimals', cuteAnimals);
+
+// ------- CLASS EXAMPLE ------------ //
 
 // everytime io runs, a new person just connected
 io.on('connection', socket => {
@@ -326,8 +352,8 @@ io.on('connection', socket => {
     // gives us every value inside of object
     // stores those in array
 
+
     db.getUsersByIds(arrOfIds).then(results => {
-        console.log("SERVER RESPONSE IN db.getUserByIds: ", results.rows);
         socket.emit("onlineUsers", results.rows);
     }).catch(err => {
         console.log(err);
@@ -343,11 +369,46 @@ io.on('connection', socket => {
 
     // GET THE NEW USER TO JOIN THE ARRAY
 
+    socket.emit('messages', arrOfMessages);
+
+
+    socket.on('chatMessage', msg => {
+
+
+        console.log("msg from chat.js: ", msg);
+        // now I have my message in the server
+        db.getUser(userId).then(result => {
+            let chatObj = {
+                message : msg,
+                first : result.rows[0].first,
+                last: result.rows[0].last,
+                profilepic: result.rows[0].profilepic,
+                id : result.rows[0].id + '-' + Date.now() + '-' + Math.floor(Math.random() * 993893747483)
+            };
+            arrOfMessages.push(chatObj);
+            while (arrOfMessages.length > 10) {
+                arrOfMessages.shift();
+            }
+            console.log("result in CHAT MESSAGE SOCKET ON: ", result.rows);
+            console.log("arrOfMessages: ", arrOfMessages);
+
+            io.sockets.emit('newMessage', arrOfMessages);
+            //singulare
+
+
+        }).catch(err => {
+            console.log(err);
+        });
+
+
+    });
+
+
+    // once that object if full of info, put it into redux -dispatch, action, reducer and should see message instantly
 
 
 
     socket.on('disconnect', function(arrOfIds) {
-        console.log(`socket with id ${socketId } just disconnected`);
         db.getUser(userId).then(result => {
             delete onlineUsers[socketId];
             var newArr = Object.values(onlineUsers);
@@ -356,11 +417,12 @@ io.on('connection', socket => {
                 return;
             }
             else {
+                console.log("result.rows[0]: ", result.rows[0]);
                 io.sockets.emit('userLeft', result.rows[0]);
             }
             // if the id is unique
         }).catch(err => {
-            console.log(err);
+            console.log("error in disconnect server response : ", err);
         });
 
         // figure out if the user has just closed one of the tabs OR actually disconnected
@@ -378,4 +440,5 @@ io.on('connection', socket => {
 // This server
 //also listens to socket io communication
 
-//
+// build array of 10 most recent chat essages
+// emit that array to the client

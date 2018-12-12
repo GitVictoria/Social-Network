@@ -17,6 +17,26 @@ exports.friendsAndWannabes = receiverId => {
     );
 };
 
+exports.cancelRequest = (senderId, receiverId) => {
+    return db.query(
+        `DELETE FROM friendships
+    WHERE (receiver_id = $1 AND sender_id = $2)
+    OR (receiver_id = $2 AND sender_id = $1) RETURNING *`,
+        [senderId, receiverId]
+    );
+};
+
+exports.acceptRequest = (senderId, receiverId) => {
+    return db.query(
+        `UPDATE friendships
+        SET accepted = true
+        WHERE (receiver_id = $1 AND sender_id = $2)
+        OR (receiver_id = $2 AND sender_id = $1) RETURNING *`,
+        [senderId, receiverId]
+    );
+};
+
+
 module.exports.getUsersByIds = arrOfIds => {
     const query = `SELECT id, first, last, profilepic FROM users WHERE id = ANY($1)`;
     return db.query(query, [arrOfIds]);
