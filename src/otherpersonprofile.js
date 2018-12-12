@@ -2,18 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import FriendButton from './friendbutton';
 import axios from './axios';
+import Users from './users';
 
 
 export default class OtherPersonProfile extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {};
     }
 
     componentDidMount() {
+
+        let id = this.props.id;
+        if (!id) {
+            id = this.props.match.params.id;
+        }
         console.log("component did mount ");
         axios
-            .get("/user/" + this.props.match.params.id + "/info")
+            .get("/user/" + id + "/info")
             .then(result => {
                 console.log("results in OPP: ", result.data.rows[0]);
                 this.setState(result.data.rows[0]);

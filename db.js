@@ -50,6 +50,14 @@ exports.getUser = id => {
     );
 };
 
+exports.allUsers = id => {
+    return db.query(
+        `SELECT * FROM users
+        WHERE id <> $1`,
+        [id]
+    );
+};
+
 exports.createUsers = (first, last, password, email) => {
     return db.query(
         `INSERT INTO users (first, last, password, email)

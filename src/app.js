@@ -10,6 +10,7 @@ import OtherPersonProfile from './otherpersonprofile';
 import Friends from './friends';
 import Onlineusers from './onlineusers';
 import Chat from './chat';
+import Users from './users';
 
 export default class App extends React.Component {
     constructor() {
@@ -34,9 +35,7 @@ export default class App extends React.Component {
 
     componentDidMount() {
         axios.get('/user').then(({ data }) => {
-            console.log("response /user data: ", data);
             this.setState(data.rows[0]);
-            console.log("this state in componentmount", this.state);
         });
     }
 
@@ -55,6 +54,8 @@ export default class App extends React.Component {
     //         // left is my name - right is the state of component im in
     //     });
     // }
+
+
 
 
     render() {
@@ -98,7 +99,9 @@ export default class App extends React.Component {
                             exact path = "/chat"
                             component = {Chat}
                         />
-
+                        <Route
+                            path = "/users"
+                            component = {Users} />
                     </div>
                 </BrowserRouter>
             </div>

@@ -112,6 +112,13 @@ app.post("/friendship/:id/accept", (req, res) => {
     });
 });
 
+app.get('/usersss', (req, res) => {
+    db.allUsers(req.session.user_id).then(results => {
+        console.log("results in index.js  /usersss: ", results);
+        res.json(results.rows);
+    });
+});
+
 
 app.get('/logout', (req, res) => {
     req.session.user_id = null;

@@ -21,7 +21,7 @@ export default function Profile(props) {
 
             </div>
             <div className='nav-container'>
-                <h1>What are we up tp today?</h1>
+                <h1>What are we up to today?</h1>
                 <div className='nav-button-container'>
                     <div>
                         <button className="redirect-page"><Link to = '/friends'>FRIENDS</Link></button>
@@ -34,7 +34,7 @@ export default function Profile(props) {
                         <button className="redirect-page"><Link to = '/online'>WHO IS ONLINE</Link></button>
                     </div>
                     <div>
-                        <button className="redirect-page"><Link to = '/user/'>USERS</Link></button>
+                        <button className="redirect-page"><Link to = '/users'>USERS</Link></button>
                     </div>
                 </div>
             </div>

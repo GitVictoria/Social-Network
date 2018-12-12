@@ -397,3 +397,53 @@ button:hover {
     background-color: #e5e6e4d6;;
 
 }
+
+.user-list {
+    border: 3px solid #847577;
+   background-color: #a6a2a2bf;
+   position: absolute;
+   height: 600px;
+   width: 300px;
+   border-radius: 5%;
+   left: 30px;
+   top:200px;
+}
+
+/* .other-person {
+   border: 3px solid #847577;
+    background-color: #a6a2a2bf;
+    border-radius: 10px;
+    margin-top: 80px;
+    width: 900px;
+    margin-left: 450px;
+} */
+
+.list-of-users{
+    width: 100%;
+    height: 50px;
+    border: 2px double pink;
+    border-radius: 7%;
+    margin-top: 30px;
+    font-size: 20px;
+    color: black;
+    background-color: #e5e6e4d6;
+    text-decoration: none;
+}
+
+.list-of-users:hover{
+    background-color: #84757799;
+    border: 2px solid #2B2826;
+    border-radius: 10%;
+    font-weight: bolder;
+}
+
+.rendered-user{
+    margin-top: -10px;
+    margin-left: 200px;
+
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
