@@ -26,7 +26,10 @@ body {
 }
 
 .message-container {
-    border: 1px solid pink;
+    border: 2px double pink;
+    background-color: #e5e6e4d6;
+    border-radius: 10px;
+    border-style: double;
     display: inline-flex;
     width: 100%;
 }
@@ -37,18 +40,24 @@ body {
 }
 
 .chat-component {
-    border: 1px solid red;
+    border: 3px solid #847577;
+    background-color: #e5e6e4d6;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 250px;
+    width: 900px;
+    z-index: 110;
 }
 
 .chat-box {
     font-size: 20px;
-    border: 1px solid grey;
+    border-radius: 10px;
     height: 150px;
-    width: 500px;
-
-
-
+    width: 700px;
+    border-style:groove;
+    text-align: center;
 }
+
 
 #main {
 }
@@ -56,7 +65,7 @@ body {
 #chat-messages {
     border: 1px solid black;
     height: 400px;
-    background-color: white;
+    background-color: #a6a2a2bf;
     overflow: auto;
 }
 
@@ -70,6 +79,7 @@ body {
     background-color: #cfd2cd9e;
     width: 100%;
     display: flex;
+    border-radius: 5%
 }
 
 .registration-container {
@@ -164,7 +174,8 @@ input {
     margin-left: 70px;
     height: 300px;
     width: 350px;
-    border: 1px solid black
+    border: 2px solid pink;
+    border-radius: 5%;
 
 }
 
@@ -187,18 +198,21 @@ input {
     margin-right: 20px;
 }
 
+
 .bio {
     text-align:center;
-    border: 1px solid black;
+    border: 3px solid #847577;
     width: 800px;
     /* margin-left: 100px; */
     position: absolute;
     top: 450px;
     height: 350px;
     background-color: #cfd2cd9e;
+    border-radius: 5%
 }
 
 .edit-button {
+    margin-top: 50px;
     width: 150px;
     height: 20px;
     text-align: center;
@@ -217,11 +231,20 @@ button:hover {
     font-weight: bolder;
 }
 
-.opp-container {
-    border: 3px solid black;
-    background-color: #cfd2cd9e;
 
-}
+    .opp-container {
+        border: 3px solid #847577;
+        background-color: #a6a2a2bf;
+        border-radius: 10px;
+        margin-top: 100px;
+        margin-left: 250px;
+        width: 900px;
+        text-align: center;
+
+
+
+    }
+
 
 .friendbutton {
     width: 100px;
@@ -236,14 +259,141 @@ button:hover {
 }
 
 .online-users {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 110px;
+    border: 2px double #76C125;
+    margin-left: 20px;
+    border-radius: 5%;
 }
 
-.profile-name {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding-left: 120px;
+.online-names {
     font-size: 20px;
+    margin-left: 50px;
+    margin-top: 40px;
+}
+
+
+.online-users-container {
+    border: 3px solid #847577;
+    background-color: #e5e6e4d6;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-left: 250px;
+    width: 900px;
+}
+
+.online-user-container {
+    display: flex;
+    margin-bottom: 20px;
+
+}
+
+
+
+.profile-name {
+    padding-top: 150px;
+    padding-bottom: 50px;
+    padding-left: 100px;
+    font-size: 25px;
     text-transform: uppercase;
+}
+
+
+.awaiting-friend{
+    display: flex;
+    margin-top: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border: 2px double #847577;
+    border-radius: 5%;
+    margin-bottom: 10px;
+    background-color: #e5e6e4d6;
+
+}
+
+.awaiting-friend-name {
+    margin-top: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    font-size: 20px;
+
+}
+
+.button{
+    height: 20px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+
+}
+
+.friend{
+    display: flex;
+    margin-top: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border: 2px double #847577;
+    border-radius: 5%;
+    margin-bottom: 10px;
+    background-color: #e5e6e4d6;
+
+
+}
+
+.friend-name{
+    margin-top: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    font-size: 20px;
+
+}
+
+.friends-container{
+    border: 3px solid #847577;
+    background-color: #a6a2a2bf;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-left: 250px;
+    width: 900px;
+
+}
+
+.friendpic {
+    border-radius: 5%;
+    border: 2px solid pink;
+    padding: 5px;
+}
+
+
+.description{
+    border: 2px solid pink;
+    border-radius: 5%;
+    height: 230px;
+}
+
+.nav-container{
+     border: 3px solid #847577;
+    background-color: #a6a2a2bf;
+    position: absolute;
+    height: 600px;
+    width: 500px;
+    border-radius: 5%;
+    right: 50px;
+    top:200px;
+}
+
+.nav-button-container{
+    position: absolute;
+    width: 100%;
+    bottom: 100px;
+}
+
+.redirect-page {
+    width: 100%;
+    height: 50px;
+    border: 2px double pink;
+    border-radius: 7%;
+    margin-top: 20px;
+    font-size: 20px;
+    background-color: #e5e6e4d6;;
+
 }

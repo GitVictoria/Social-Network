@@ -9,7 +9,7 @@ export default class Main extends React.Component {
 
     render() {
         return (
-            <img className="logo" src="Hanger.jpg" alt="logo"></img>
+            <img className="logo" src="/Hanger.jpg" alt="logo"></img>
         );
     }
 }

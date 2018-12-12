@@ -24,8 +24,10 @@ class Friends extends React.Component {
             return null;
         }
         return (
-            <div>
-                <h1>FRIENDS</h1>
+            <div className='friends-container'>
+                <center>
+                    <h1>FRIENDS</h1>
+                </center>
                 {this.props.friends.map(friend => {
                     var url;
                     if (friend.profilepic) {
@@ -36,14 +38,21 @@ class Friends extends React.Component {
 
                     return (
                         <div key = {friend.id}>
-                            <img  className='friendpic' src= {url} alt=""/>
-                            <button onClick = {e=>this.props.dispatch(unfriend(friend.id))}>unfriend</button>
-                            {friend.first} {friend.last}
+                            <div className='friend'>
+
+                                <img  className='friendpic' src= {url} alt=""/>
+                                <div className='friend-name'>
+                                    {friend.first} {friend.last}
+                                </div>
+                                <button className='button' onClick = {e=>this.props.dispatch(unfriend(friend.id))}>unfriend</button>
+                            </div>
                         </div>
                     );
                 })
                 }
-                <h1>PEOPLE WHO WANT TO BE YOUR FRIENDS</h1>
+                <center>
+                    <h1>AWAITING RESPONSE</h1>
+                </center>
                 {this.props.wannabes.map(friend => {
                     var url;
                     if (friend.profilepic) {
@@ -54,10 +63,13 @@ class Friends extends React.Component {
 
                     return (
                         <div key = {friend.id}>
-                            <img className='friendpic' src={url} alt=""/>
-                            <button onClick = {e=>this.props.dispatch(acceptFriendRequest(friend.id))}>accept friendrequest</button>
-
-                            {friend.first} {friend.last}
+                            <div className='awaiting-friend'>
+                                <img className='friendpic' src={url} alt=""/>
+                                <div className='awaiting-friend-name'>
+                                    {friend.first} {friend.last}
+                                </div>
+                                <button className='button' onClick = {e=>this.props.dispatch(acceptFriendRequest(friend.id))}>accept friendrequest</button>
+                            </div>
                         </div>
                     );
                 })

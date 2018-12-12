@@ -45,9 +45,13 @@ class Chat extends React.Component {
 
         return (
             <div className='chat-component'>
-                <h1>CHAT</h1>
+                <center>
+                    <h1>CHAT</h1>
+                </center>
                 <div id="chat-messages" ref={elem => (this.elem = elem)}>
-                    <h1>MESSAGES</h1>
+                    <center>
+                        <h1>MESSAGES</h1>
+                    </center>
                     {this.props.message.map(message => {
                         var url;
                         if (message.profilepic) {

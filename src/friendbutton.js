@@ -91,7 +91,7 @@ export default class FriendButton extends React.Component {
     render() {
         return (
             <div>
-                <button className="friendbutton" onClick={this.makeFriendRequest}>
+                <button className="button" onClick={this.makeFriendRequest}>
                     {this.state.buttontext}
                 </button>
                 {this.state.status == 2 && (

@@ -31,15 +31,13 @@ export default class OtherPersonProfile extends React.Component {
     render() {
         return (
             <div className="opp-container">
-                <h1>The user id {this.state.id} profile</h1>
+                <h5>The user id {this.state.id} profile</h5>
                 <h2> {this.state.first} {this.state.last}</h2>
                 <img className="profile-pic" src={this.state.profilepic}/>
-                <h3>Get to know a little about {this.state.first}!</h3>
-                <p>{this.state.bio}</p>
+                <h4>Get to know a little about {this.state.first}!</h4>
+                <h2>{this.state.bio}</h2>
                 <FriendButton otherUserId = {this.props.match.params.id}/>
 
-                <Link to = '/user/2'>user2</Link>
-                <h1>{ this.props.match.params.id }</h1>
             </div>
         );
     }

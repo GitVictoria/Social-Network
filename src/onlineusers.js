@@ -21,8 +21,10 @@ class Onlineusers extends React.Component {
         }
         console.log("this.props in online users RENDER ", this.props);
         return (
-            <div>
-                <h1>PEOPLE WHO ARE CURRENTLY ONLINE</h1>
+            <div className='online-users-container'>
+                <center>
+                    <h1>Who is hanging online right now?</h1>
+                </center>
                 {this.props.users.map(users => {
                     var url;
                     if (users.profilepic) {
@@ -33,8 +35,13 @@ class Onlineusers extends React.Component {
 
                     return (
                         <div key = {users.id}>
-                            <img className="online-users" src={url} alt="online user"/>
-                            {users.first} {users.last}
+                            <div className='online-user-container'>
+                                <img className="online-users" src={url} alt="online user"/>
+                                <div className='online-names'>
+                                    {users.first} {users.last}
+
+                                </div>
+                            </div>
                         </div>
                     );
                 })
