@@ -15,7 +15,7 @@ export default function Welcome() {
     return (
 
         <div className="welcome-container">
-            
+
             <img className="welcome-logo" src="Hanger.jpg"/>
             <HashRouter>
                 <div>
