@@ -77,7 +77,7 @@ export default function(state = {}, action) {
             users: state.users.filter(
                 user => {
                     if (user.id != action.users) {
-                        return users;
+                        return user;
                     }
                 }
             )

@@ -116,6 +116,8 @@ app.get('/usersss', (req, res) => {
     db.allUsers(req.session.user_id).then(results => {
         console.log("results in index.js  /usersss: ", results);
         res.json(results.rows);
+    }).catch (err =>{
+        console.log( err);
     });
 });
 
