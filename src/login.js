@@ -1,9 +1,6 @@
 import React from 'react';
 import axios from './axios';
 
-// check hash routing in Vue
-// sendgird
-//sendinblue
 export default class Login extends React.Component {
     constructor() {
         super();
@@ -33,18 +30,11 @@ export default class Login extends React.Component {
                 this.setState({
                     error: "something went wrong, please try again!"
                 });
-                // });
             } else {
                 location.replace('/');
             }
         });
     }
-
-
-
-
-
-
 
 
     render() {
@@ -54,13 +44,13 @@ export default class Login extends React.Component {
                     <h1>Please Log In To Continue</h1>
                     <form onSubmit= {this.handleSubmit}>
                         <div className="loginTabs">
-                            <input onChange = {this.handleChange} type="text" name="email" placeholder="Email Address"/>
+                            <input onChange = {this.handleChange} type="text" name="email" placeholder="Email Address" autoComplete='off'/>
                         </div>
                         <div className="loginTabs">
                             <input onChange = {this.handleChange} type="password" name="password" placeholder="Password"/>
                         </div>
-                        <div className="loginTabs">
-                            <button name="button">Submit</button>
+                        <div>
+                            <button id="login-button" name="button">Submit</button>
                         </div>
                     </form>
                 </center>

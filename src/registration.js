@@ -123,46 +123,6 @@ export default class Registration extends React.Component {
             return;
         }
 
-        // switch (e.target.name) {
-        //                 case 'first':
-        //                     error.first = e.target.value.length < 2 && e.target.value.length > 0 ?
-        //                         this.setState({
-        //                             error: {
-        //                                 first: "Your name should consist of 2 characters or more"
-        //                             }
-        //                         })
-        //                         : "";
-        //
-        //
-        //                     break;
-        //                 case 'last':
-        //                     error.last = e.target.value.length < 2 && e.target.value.length > 0
-        //                         ? "Your last name must contain more that 2 caracters"
-        //                         : "";
-        //                     break;
-        //                 case 'password':
-        //                     error.password = e.target.value.length < 2 && e.target.value.length > 0
-        //                         ? "Your password name must contain more that 2 caracters"
-        //                         : "";
-        //                     break;
-        //                 case 'email':
-        //                     error.email = e.target.value.length < 2 && e.target.value.length > 0
-        //                         ? "Your email must contain more that 2 caracters"
-        //                         : "";
-        //                     break;
-        //                 default:
-        //                     break;
-        // }
-
-
-
-        // ------ ERROR HANDLING ------ //
-        // const error = validate(this.state);
-        // const isEnabled =
-        //  first.length > 0 &&
-        //  last.length > 0 &&
-        //  password.length > 0 &&
-        //  email.legth > 0;
 
         // ---------- VALIDATOR -------------//
         if (formValid(this.state.error)) {
@@ -193,7 +153,6 @@ export default class Registration extends React.Component {
 
     render() {
         return (
-            // all of our JSX - what shouls appear on the screen
             <div className="registration-container">
                 <center>
                     <h1>Please Register</h1>
@@ -215,7 +174,7 @@ export default class Registration extends React.Component {
                         <div className="register-button"><button className="register-button">Register</button>
 
                         </div>
-                        <button className="login-button"><Link to = '/login'>Click here to Log in</Link></button>
+                        <button className="login-button"><Link to = '/login'>Already a member? Log-in here</Link></button>
                     </form>
                 </center>
                 <center>
