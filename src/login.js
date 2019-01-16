@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from './axios';
+import { Link } from 'react-router-dom';
 
 export default class Login extends React.Component {
     constructor() {
@@ -8,6 +9,7 @@ export default class Login extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
 
 
         this.state = {
@@ -36,6 +38,11 @@ export default class Login extends React.Component {
         });
     }
 
+    handleClick() {
+        console.log("go back button was pressed ");
+        this.props.history.push('/');
+    }
+
 
     render() {
         return (
@@ -58,6 +65,7 @@ export default class Login extends React.Component {
                     <div className="reg-error">
                         <h1>{this.state.error}</h1>
                     </div>
+                    <button onClick = {this.handleClick}>Go Back</button>
                 </center>
             </div>
 

@@ -1,6 +1,3 @@
-// class component because it needs to have state
-//  because it needs 'data' (in Vue) to hold information
-
 import React from 'react';
 import axios from './axios';
 import { Link } from 'react-router-dom';
@@ -176,6 +173,7 @@ export default class Registration extends React.Component {
                         </div>
                         <button className="login-button"><Link to = '/login'>Already a member? Log-in here</Link></button>
                     </form>
+                    
                 </center>
                 <center>
                     <div className="reg-error" >

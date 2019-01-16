@@ -14,9 +14,9 @@ class Friends extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(friendsAndWannabes());
+        this.props.dispatch(friendsAndWannabes()); // receive a list of friends and wannabes
 
-        // receive a list of friends and wannabes
+
     }
 
     render() {
