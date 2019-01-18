@@ -22,12 +22,19 @@ export default class App extends React.Component {
         };
         this.showUploader = this.showUploader.bind(this);
         this.setBio = this.setBio.bind(this);
+        this.hideUploader = this.hideUploader.bind(this);
     }
 
     showUploader() {
         this.setState({
             uploaderIsVisible: true
         }, () => console.log("this.state in showUploader: ", this.state));
+    }
+
+    hideUploader() {
+        this.setState({
+            uploaderIsVisible: false
+        });
     }
 
     // componenet didmount function is a lifecycle component
@@ -74,7 +81,7 @@ export default class App extends React.Component {
                     profilePicUrl = { this.state.profilepic }
                     showUploader = {this.showUploader}
                 />
-                {this.state.uploaderIsVisible && <Uploader/>}
+                {this.state.uploaderIsVisible && <Uploader hideUploader= {this.hideUploader}/>}
                 <BrowserRouter>
                     <div>
                         < Route exact path='/' render= { () => {

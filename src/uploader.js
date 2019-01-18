@@ -4,9 +4,15 @@ import axios from './axios';
 export default class Uploader extends React.Component {
     constructor() {
         super();
+
+        this.state = {
+            uploaderVisible: true
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+
 
     handleChange(e) {
         console.log("handleChange is running", e.target.files[0]);
@@ -15,6 +21,8 @@ export default class Uploader extends React.Component {
             [e.target.name ] : e.target.files[0] // name: filename
         });
     }
+
+
 
     handleSubmit(e) {
         e.preventDefault();
@@ -27,6 +35,8 @@ export default class Uploader extends React.Component {
         }).catch(err => {
             console.log(err);
         });
+
+
 
         // VUE IMAGE  UPLOAD
         // formData stuff
@@ -46,10 +56,12 @@ export default class Uploader extends React.Component {
     render() {
         return (
             <div className="uploader">
+                <h1 className='exit-button' onClick = {this.props.hideUploader}>X</h1>
                 <h1>Upload an image</h1>
-                <form onSubmit = {this.handleSubmit}>
-                    <input name = 'file' onChange={ this.handleChange } type = "file" accept = "image/*"/>
-                    <button>upload</button>
+                <form className="form-uploader"onSubmit = {this.handleSubmit}>
+                    <input id="img" className="form-input" name = 'file' onChange={ this.handleChange } type = "file" accept = "image/*"/>
+                    <button className="label-button"><label htmlFor="img">Select a file</label></button>
+                    <button className="upload-button" onClick = {this.props.hideUploader} >upload</button>
                 </form>
             </div>
 
