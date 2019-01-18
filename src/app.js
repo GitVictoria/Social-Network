@@ -35,7 +35,12 @@ export default class App extends React.Component {
 
     componentDidMount() {
         axios.get('/user').then(({ data }) => {
+            if (data.rows[0].profilepic == null) {
+                data.rows[0].profilepic = 'default.png';
+            }
             this.setState(data.rows[0]);
+            // data.rows[0].profilepicurl = null
+            console.log("profile pic url:", data.rows[0]);
         });
     }
 

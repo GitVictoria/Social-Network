@@ -166,12 +166,13 @@ input {
 }
 
 .welcome-statement {
-    font-size: 35px;
+    font-size: 25px;
     position: fixed;
-    top: 10%;
-    left: 35%;
+    top: 12%;
+    left: 17%;
     margin-top: -50px;
     margin-left: -50px;
+    background-color: #ffffffd1;
 
 }
 

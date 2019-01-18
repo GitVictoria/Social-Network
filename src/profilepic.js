@@ -1,12 +1,12 @@
-// presentatonal components
-// will only display information
+// presentatonal component
+
 import React from 'react';
 
 export default function ProfilePic(props) { // props is how i receive this.state I passed in app.js
     return(
         <div>
 
-            <h1 className="welcome-statement">Welcome to the HANG, {props.first}</h1>
+            <h1 className="welcome-statement">The Hang, your only fashion social network. Welcome, {props.first}</h1>
             <img onClick = { props.showUploader } className="pic" src= {props.profilePicUrl}/>
 
         </div>
