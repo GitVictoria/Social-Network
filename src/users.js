@@ -5,6 +5,7 @@ import OtherPersonProfile from './otherpersonprofile';
 import axios from './axios';
 import { Link } from 'react-router-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
+import Back from './goBack';
 
 
 
@@ -12,7 +13,8 @@ export default class Users extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            otherPersonId: ''
+            otherPersonId: '',
+            arrowVisible: false
         };
 
         this.showPerson = this.showPerson.bind(this);
@@ -33,6 +35,10 @@ export default class Users extends React.Component {
         }).catch(err => {
             console.log(err);
         });
+
+        this.setState({
+            arrowVisible: true
+        });
     }
 
     render() {
@@ -42,6 +48,7 @@ export default class Users extends React.Component {
         return(
 
             <div>
+                {this.state.arrowVisible && <Back/>}
 
                 <div className='user-list'>
                     <h1>List of users</h1>

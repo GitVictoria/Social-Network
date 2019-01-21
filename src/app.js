@@ -17,13 +17,15 @@ export default class App extends React.Component {
         super();
         this.state = {
             uploaderIsVisible: false,
-            bioVisible: false
+            bioVisible: false,
 
         };
         this.showUploader = this.showUploader.bind(this);
         this.setBio = this.setBio.bind(this);
         this.hideUploader = this.hideUploader.bind(this);
     }
+
+
 
     showUploader() {
         this.setState({
@@ -73,6 +75,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="app-container">
+
                 <Logout/>
                 <Logo/>
 
@@ -83,7 +86,7 @@ export default class App extends React.Component {
                 />
                 {this.state.uploaderIsVisible && <Uploader hideUploader= {this.hideUploader}/>}
                 <BrowserRouter>
-                    <div>
+                    <div onClick={this.showArrow}>
                         < Route exact path='/' render= { () => {
                             return <Profile
                                 id={this.state.id}

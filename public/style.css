@@ -492,3 +492,14 @@ button:hover {
     text-decoration: none;
     color: black;
 }
+
+.back-arrow {
+    margin-top: 0px;
+    margin-left: 70px;
+    cursor: pointer
+}
+
+.back-arrow:hover {
+    border: 3px solid black;
+
+}

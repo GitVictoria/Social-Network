@@ -2,13 +2,22 @@ import { initSocket } from './socket';
 import React from 'react';
 import { connect } from'react-redux';
 import {usersOnline} from './action';
+import Back from './goBack';
 
 
 
 class Onlineusers extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            arrowVisible:false
+        };
+    }
+
+    componentDidMount() {
+        this.setState({
+            arrowVisible: true
+        });
     }
 
     // componentDidMount() {
@@ -21,31 +30,34 @@ class Onlineusers extends React.Component {
         }
         console.log("this.props in online users RENDER ", this.props);
         return (
-            <div className='online-users-container'>
-                <center>
-                    <h1>Who is hanging online right now?</h1>
-                </center>
-                {this.props.users.map(users => {
-                    var url;
-                    if (users.profilepic) {
-                        url = users.profilepic;
-                    } else {
-                        url = '/Hanger.jpg';
-                    }
+            <div>
+                {this.state.arrowVisible && <Back/>}
+                <div className='online-users-container'>
+                    <center>
+                        <h1>Who is hanging online right now?</h1>
+                    </center>
+                    {this.props.users.map(users => {
+                        var url;
+                        if (users.profilepic) {
+                            url = users.profilepic;
+                        } else {
+                            url = '/Hanger.jpg';
+                        }
 
-                    return (
-                        <div key = {users.id}>
-                            <div className='online-user-container'>
-                                <img className="online-users" src={url} alt="online user"/>
-                                <div className='online-names'>
-                                    {users.first} {users.last}
+                        return (
+                            <div key = {users.id}>
+                                <div className='online-user-container'>
+                                    <img className="online-users" src={url} alt="online user"/>
+                                    <div className='online-names'>
+                                        {users.first} {users.last}
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })
-                }
+                        );
+                    })
+                    }
+                </div>
             </div>
         );
     }

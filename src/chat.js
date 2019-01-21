@@ -1,10 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { initSocket } from './socket';
+import Back from './goBack';
 
 class Chat extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            arrowVisible: false
+        };
 
         this.sendMessage = this.sendMessage.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
@@ -24,6 +28,9 @@ class Chat extends React.Component {
     componentDidMount() {
         //  display the last 10 messages HOW?
         this.elem;
+        this.setState({
+            arrowVisible: true
+        });
 
 
     }
@@ -44,41 +51,44 @@ class Chat extends React.Component {
         }
 
         return (
-            <div className='chat-component'>
-                <center>
-                    <h1>CHAT</h1>
-                </center>
-                <div id="chat-messages" ref={elem => (this.elem = elem)}>
+            <div>
+                {this.state.arrowVisible && <Back/>}
+                <div className='chat-component'>
                     <center>
-                        <h1>MESSAGES</h1>
+                        <h1>CHAT</h1>
                     </center>
-                    {this.props.message.map(message => {
-                        var url;
-                        if (message.profilepic) {
-                            url = message.profilepic;
+                    <div id="chat-messages" ref={elem => (this.elem = elem)}>
+                        <center>
+                            <h1>MESSAGES</h1>
+                        </center>
+                        {this.props.message.map(message => {
+                            var url;
+                            if (message.profilepic) {
+                                url = message.profilepic;
 
-                        } else {
-                            url = '/Hanger.jpg';
-                        }
+                            } else {
+                                url = '/Hanger.jpg';
+                            }
 
-                        return (
-                            <div key = { message.id}>
-                                <div className='message-container'>
-                                    <img className="chat-users" src={url} alt="online user"/>
-                                    <div>
-                                        <p> {message.first} Says:</p>
-                                        <p>{message.message}</p>
+                            return (
+                                <div key = { message.id}>
+                                    <div className='message-container'>
+                                        <img className="chat-users" src={url} alt="online user"/>
+                                        <div>
+                                            <p> {message.first} Says:</p>
+                                            <p>{message.message}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })
-                    }
-                </div>
-                <div>
-                    <center>
-                        <textarea className="chat-box" onKeyDown={this.sendMessage} placeholder="Press Enter To Submit The Message"/>
-                    </center>
+                            );
+                        })
+                        }
+                    </div>
+                    <div>
+                        <center>
+                            <textarea className="chat-box" onKeyDown={this.sendMessage} placeholder="Press Enter To Submit The Message"/>
+                        </center>
+                    </div>
                 </div>
             </div>
         );
