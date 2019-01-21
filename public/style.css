@@ -75,7 +75,7 @@ body {
 .profile-container {
     float: left;
     border: 2px solid #847577;
-    background-color: #cfd2cd9e;
+    background-color: #ffffffbf;
     width: 56%;
     display: flex;
     border-radius: 5%
@@ -229,14 +229,14 @@ input {
     left: 40%;
     margin-top: -50px;
     margin-left: -100px;
-    background-color: #e5e6e4eb;
+    background-color: white;
     z-index: 100;
 
 }
 
 .bio-input {
     width: 500px;
-    height: 250px;
+    height: 100px;
     font-size: 20px;
     margin-left: 0px;
     margin-right: 20px;
@@ -251,7 +251,7 @@ input {
     position: absolute;
     top: 450px;
     height: 350px;
-    background-color: #cfd2cd9e;
+    background-color: #ffffffbf;
     border-radius: 5%
 }
 
@@ -416,7 +416,7 @@ button:hover {
 
 .nav-container{
      border: 3px solid #847577;
-    background-color: #a6a2a2bf;
+    background-color: #ffffffbf;
     position: absolute;
     height: 600px;
     width: 500px;

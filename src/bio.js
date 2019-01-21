@@ -72,7 +72,7 @@ export default class Bio extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <h2>Please enter your BIO bellow</h2>
 
-                    <input name='bio' type='text' placeholder='How Would You Describe Yourself?'  className="bio-input" onChange={this.handleChange}/>
+                    <input name='bio' type='text' placeholder='How Would You Describe Yourself?'  className="bio-input" onChange={this.handleChange} autoComplete="off"/>
                     <button className="submit-button" onClick={this.handleSubmit}>Submit</button>
                 </form>
             </div>
@@ -85,7 +85,7 @@ export default class Bio extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <h3>Tell us something about yourself...</h3>
 
-                        <input name='bio' type='text' placeholder='Edit Your Description Here'  className="bio-input" onChange={this.handleChange}/>
+                        <input name='bio' type='text' placeholder='Edit Your Description Here'  className="bio-input" onChange={this.handleChange} autoComplete="off"/>
                         <button className="submit-button" onClick={this.handleSubmit}>Submit</button>
                     </form>
                 </div>
