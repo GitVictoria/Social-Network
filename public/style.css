@@ -229,7 +229,9 @@ input {
     left: 40%;
     margin-top: -50px;
     margin-left: -100px;
-    background-color: #e5e6e4eb
+    background-color: #e5e6e4eb;
+    z-index: 100;
+
 }
 
 .bio-input {

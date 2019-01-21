@@ -12,7 +12,15 @@ export default class Bio extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.editBio = this.editBio.bind(this);
+        this.exitBio = this.exitBio.bind(this);
 
+    }
+
+    exitBio() {
+        console.log("exit bio in action");
+        this.setState({
+            bioVisible: false
+        });
     }
 
     handleChange(e) {
@@ -73,6 +81,7 @@ export default class Bio extends React.Component {
 
                 {this.state.bioVisible &&
                 <div className="bio-inpout-container">
+                    <h1 className="exit-button" onClick={this.exitBio}>X</h1>
                     <form onSubmit={this.handleSubmit}>
                         <h3>Tell us something about yourself...</h3>
 
