@@ -21,6 +21,7 @@ class Friends extends React.Component {
         });
 
 
+
     }
 
     render() {
@@ -29,7 +30,7 @@ class Friends extends React.Component {
         }
         return (
             <div>
-                {this.state.arrowVisible && <Back/>}
+                {this.state.arrowVisible && <Back history={this.props.history}/>}
                 <div className='friends-container'>
                     <center>
                         <h1>FRIENDS</h1>
